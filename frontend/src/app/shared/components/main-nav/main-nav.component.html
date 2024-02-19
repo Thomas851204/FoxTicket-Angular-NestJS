@@ -1,0 +1,51 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" [(opened)]="isOpen">
+    <button *ngIf="isAdmin" mat-button routerLink="/ticket/manageTickets">
+      Manage Tickets
+    </button>
+    <button *ngIf="!isAuthenticated" mat-button routerLink="/user/login">
+      Login
+    </button>
+    <button *ngIf="!isAuthenticated" mat-button routerLink="/user/register">
+      Register
+    </button>
+    <button
+      *ngIf="isAuthenticated"
+      mat-button
+      class="user-account"
+      routerLink="/user/profile"
+    >
+      <img [src]="profilePictureUrl" />
+    </button>
+  </mat-sidenav>
+</mat-sidenav-container>
+
+<mat-toolbar class="header">
+  <div class="mobile-content">
+    <button mat-icon-button (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div class="logo-content">
+    <button mat-icon-button routerLink="/" class="home logo"></button>
+    <h1 class="title">Fox Tickets</h1>
+  </div>
+  <div class="nav-content">
+    <button *ngIf="isAdmin" mat-button routerLink="/ticket/managetickets">
+      Manage Tickets
+    </button>
+  </div>
+  <div *ngIf="isAuthenticated" class="auth-content">
+    <button mat-button (click)="logout()">Logout</button>
+  </div>
+  <div *ngIf="!isAuthenticated" class="auth-content">
+    <button mat-button routerLink="/user/login">Login</button>
+    <p>|</p>
+    <button mat-button routerLink="/user/register">Register</button>
+  </div>
+  <div *ngIf="isAuthenticated && displayUserProfileIcon()">
+    <button mat-button class="user-account" routerLink="/user/profile">
+      <img [src]="profilePictureUrl" />
+    </button>
+  </div>
+</mat-toolbar>

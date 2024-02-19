@@ -1,0 +1,23 @@
+@import "src/assets/styles/variables.scss";
+
+.content-wrapper {
+  margin: 0 15px;
+  
+}
+  
+h1 {
+  font-family: $ticket-font;
+  color: $strong-green;
+  font-size: 2em;
+}
+  
+h2, h3, h4, h5, h6 {
+  font-family: $ticket-font;
+  color: $dark-green;
+}
+  
+p {
+  font-family: $ticket-font;
+  color: $mid-green;
+}
+  

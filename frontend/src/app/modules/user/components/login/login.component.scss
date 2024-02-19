@@ -1,0 +1,13 @@
+@import "src/assets/styles/variables.scss";
+
+:host {
+  margin: auto;
+  background-color: $light-green;
+  box-shadow: 5px 5px 20px 0px;
+  border-radius: 15px;
+  padding: 70px;
+
+  button {
+    margin: 20px;
+  }
+}

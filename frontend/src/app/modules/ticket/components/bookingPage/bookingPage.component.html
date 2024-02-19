@@ -1,0 +1,58 @@
+<!-- display ONLY if movie is not empty (movie var is filled with data from backend) -->
+<div class="content" *ngIf="movie">
+  <div class="form">
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+      <h2>{{ title }}</h2>
+      <h3>Select Date:</h3>
+      <mat-form-field>
+        <mat-label>Screening Date</mat-label>
+        <mat-select formControlName="selectedDate">
+          <mat-option *ngFor="let date of dates" [value]="date">
+            {{ date }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="bookingForm.get('selectedDate')?.invalid"
+          >Pick a date!</mat-error
+        >
+      </mat-form-field>
+      <h3>Select number of tickets:</h3>
+      <mat-form-field>
+        <!-- (change) when value is changed, trigger the onNumberOfTicketsChange() method -->
+        <mat-label>Number of tickets</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="numberOfTickets"
+          min="1"
+          [max]="movie.numOfTickets"
+          (change)="onNumberOfTicketsChange()"
+        />
+        <mat-error
+          *ngIf="bookingForm.get('numberOfTickets')?.errors?.['required']"
+          >Choose the number of tickets!</mat-error
+        >
+        <mat-error *ngIf="bookingForm.get('numberOfTickets')?.errors?.['min']"
+          >Choose at least one ticket!</mat-error
+        >
+        <mat-error *ngIf="bookingForm.get('numberOfTickets')?.errors?.['max']"
+          >Not enough tickets are available!</mat-error
+        >
+      </mat-form-field>
+      <h3>Price per ticket: {{ movie.price }}<br />Total price:</h3>
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price" />
+      </mat-form-field>
+      <!-- Add basket button disabled if any input field is invalid -->
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!bookingForm.valid"
+      >
+        Add to basket
+      </button>
+    </form>
+    <img *ngIf="movie.poster" src="{{ movie.poster }}" />
+  </div>
+</div>

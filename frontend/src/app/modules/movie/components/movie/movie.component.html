@@ -1,0 +1,77 @@
+<div
+  [ngStyle]="{
+    'background-size': 'cover',
+    'background-position': '50% 0',
+    'background-image':
+      'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(' +
+      baseImagePath +
+      (movie?.backdrop_path || '') +
+      ')'
+  }"
+>
+  <div class="content-section">
+    <div class="content-wrapper">
+      <div class="info">
+        <p>
+          <strong
+            >{{ movie?.title }} | {{ formatRuntime(movie?.runtime) }}</strong
+          >
+        </p>
+        <div class="genres-container">
+          <div class="genre" *ngFor="let genre of movie?.genres">
+            {{ genre }}
+          </div>
+        </div>
+        <p>
+          <i>{{ movie?.overview }}</i>
+        </p>
+        <p>{{ movie?.release_date | date }}</p>
+
+        <button
+          [routerLink]="['/ticket/booking']"
+          [queryParams]="{ id: movieId }"
+        >
+          Book a ticket
+        </button>
+      </div>
+      <div *ngIf="movie?.poster_path" class="poster">
+        <img
+          src="{{ baseImagePath + movie?.poster_path }}"
+          alt="{{ movie?.title }} poster"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="extended-info">
+    <div class="card-container">
+      <div class="card" *ngFor="let actor of imageCast">
+        <img
+          [src]="baseImagePath + actor.profile_path"
+          alt="{{ actor.name }}"
+        />
+        <div class="card-info">
+          <strong>{{ actor.name }}</strong
+          ><br />
+          <span>Played as {{ actor.character }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-container">
+      <div class="card" *ngFor="let actor of plainCast">
+        <div class="card-info">
+          <strong>{{ actor.name }}</strong
+          ><br />
+          <span>Played as {{ actor.character }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-container">
+      <div class="card prod-logo-card" *ngFor="let prod of imageProductions">
+        <img [src]="baseImagePath + prod[0]" alt="{{ prod[1] }}" />
+      </div>
+    </div>
+  </div>
+</div>

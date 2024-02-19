@@ -1,0 +1,50 @@
+<h2>Now Playing</h2>
+<div class="content-section implementation">
+  <div class="card">
+    <p-carousel
+      [value]="nowPlaying"
+      styleClass="custom-carousel"
+      [autoplayInterval]="8000"
+      [numVisible]="11"
+      [numScroll]="1"
+      [circular]="false"
+    >
+      <ng-template let-image pTemplate="item">
+        <div
+          class="item"
+          [routerLink]="['/movieDetails']"
+          [queryParams]="{ id: image.id }"
+        >
+          <img src="{{ baseImagePath }}{{ image.poster_path }}" />
+          <p class="vote-average">{{ image.vote_average }}</p>
+          <div class="shadow">
+            <p>{{ image.title }}</p>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>
+<h2>Upcoming</h2>
+<div class="content-section implementation">
+  <div class="card">
+    <p-carousel
+      [value]="upcomingMovies"
+      styleClass="custom-carousel"
+      [autoplayInterval]="7000"
+      [numVisible]="11"
+      [numScroll]="2"
+      [circular]="false"
+    >
+      <ng-template let-image pTemplate="item">
+        <div class="item">
+          <img src="{{ baseImagePath }}{{ image.poster_path }}" />
+          <p class="vote-average">{{ image.vote_average }}</p>
+          <div class="shadow">
+            <p>{{ image.title }}</p>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>

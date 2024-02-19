@@ -1,0 +1,84 @@
+@import "src/assets/styles/variables.scss";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+#tab {
+  display: flex;
+  flex-direction: row;
+
+  .table {
+    width: 33%;
+    min-width: 540px;
+  }
+  .iconWrap {
+    display: flex;
+    gap: 20px;
+  }
+  .selection {
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+
+    .form-grid {
+      form {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 5px 5px 15px 0px;
+        background-color: $light-green;
+        padding: 20px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+
+        .form-row {
+          width: 100%;
+
+          mat-form-field {
+            margin-right: 10px;
+            width: 150px;
+          }
+
+          &.second {
+            .input-container {
+              min-width: 500px;
+            }
+
+            mat-form-field {
+              width: 150px;
+            }
+
+            .selected-date {
+              background-color: #abc5a2;
+              border-radius: 3px;
+              padding: 3px;
+              margin: 0 5px 5px 0;
+              height: 30px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              button {
+                border: none;
+                background-color: transparent;
+              }
+            }
+          }
+        }
+
+        .seldates {
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+    }
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+
+      button {
+        font-size: 18px;
+        max-width: 100px;
+        background: $dark-green;
+        color: white;
+      }
+    }
+  }
+}

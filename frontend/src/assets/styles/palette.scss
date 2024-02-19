@@ -1,0 +1,13 @@
+@import "/src/assets/styles/variables.scss";
+$ticket-palette: (
+  main: $strong-green,
+  lightest: $light-green,
+  lighter: $mid-green,
+  darker: $dark-green,
+  contrast: (
+    main: #ffffff,
+    lightest: #000000,
+    lighter: #000000,
+    darker: #ffffff,
+  ),
+);

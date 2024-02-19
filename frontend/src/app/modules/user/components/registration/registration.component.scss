@@ -1,0 +1,64 @@
+@import "src/assets/styles/variables.scss";
+@import "src/assets/styles/partials/form.scss";
+@import "src/assets/styles/partials/card.scss";
+
+form {
+  height: fit-content;
+  width: 500px;
+  background-color: $light-green;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 5px 5px 20px 0px;
+  font-size: 24px;
+  padding: 40px 0;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  p {
+    text-align: center;
+    color: $dark-green;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+
+  mat-form-field {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 60%;
+
+    mat-error {
+      color: red;
+    }
+
+    input {
+      height: 30px;
+      font-size: 24px;
+    }
+  }
+
+  button[mat-icon-button] {
+    background: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  button[type="submit"] {
+    font-size: 18px;
+    max-width: 100px;
+    background: $dark-green;
+    color: white;
+    margin-bottom: 10px;
+    padding: 0px 16px;
+  }
+
+  a {
+    font-size: 14px;
+  }
+}

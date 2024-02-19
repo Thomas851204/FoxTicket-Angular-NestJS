@@ -1,0 +1,21 @@
+<form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Username</mat-label>
+    <input matInput class="username" formControlName="username" />
+    <mat-error *ngIf="loginForm.invalid">Username is required</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      class="password"
+      type="password"
+      formControlName="password"
+    />
+    <mat-error *ngIf="loginForm.invalid">Password is required</mat-error>
+  </mat-form-field>
+  <button type="submit" mat-raised-button [disabled]="loginForm.invalid">
+    Log in
+  </button>
+  <a routerLink="/user/register">No account yet?</a>
+</form>

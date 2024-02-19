@@ -1,0 +1,20 @@
+@import "src/assets/styles/variables.scss";
+
+.mat-card {
+    font-family: $ticket-font;
+    background-color: $mid-green;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 5px 5px 20px 0px;
+}
+  
+.special-card {
+    font-family: $ticket-font;
+    background-color: $light-green;
+    border-radius: 10px;
+    border: ridge 3px $strong-green;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 5px 5px 20px 0px;
+}
+  

@@ -1,0 +1,11 @@
+<div class="mainWrap">
+  <router-outlet></router-outlet>
+  <div class="footerWrap">
+    <app-footer></app-footer>
+  </div>
+  <div class="page-overlay-wrapper" *ngIf="spinnerService.isLoading | async">
+    <mat-progress-spinner class="spinner" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</div>
+<app-main-nav></app-main-nav>

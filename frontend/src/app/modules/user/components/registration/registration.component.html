@@ -1,0 +1,76 @@
+<form
+  *ngIf="registrationForm"
+  [formGroup]="registrationForm"
+  (ngSubmit)="register()"
+>
+  <p *ngIf="email">Verification email sent to {{ email }}</p>
+  <mat-form-field appearance="outline">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username" />
+    <mat-error *ngIf="registrationForm.controls['username'].invalid">
+      Username is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    <mat-error *ngIf="registrationForm.controls['email'].invalid">
+      Email must be in the correct format.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Enter your password</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      formControlName="password"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    <mat-error *ngIf="registrationForm.controls['password'].invalid">
+      Password must be 8+ characters with at least 1 letter and 1 digit
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Confirm your password</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      formControlName="confirmPassword"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    <mat-error *ngIf="registrationForm.hasError('passwordMismatch')">
+      Passwords must match.
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    type="submit"
+    [disabled]="
+      registrationForm.invalid ||
+      !registrationForm.get('confirmPassword')?.value
+    "
+  >
+    Register!
+  </button>
+  <button mat-button routerLink="/user/login">Already signed up?</button>
+</form>

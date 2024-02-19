@@ -1,0 +1,25 @@
+@use "@angular/material" as mat;
+
+@import "/src/assets/styles/variables.scss";
+@import "/src/assets/styles/palette.scss";
+
+@include mat.core();
+
+$cf-primary: mat.define-palette($ticket-palette, main, lighter, darker);
+$cf-accent: mat.define-palette($ticket-palette, lighter, main, darker);
+$cf-typography: mat.define-typography-config(
+  $font-family: $ticket-font,
+);
+
+$codefellas-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $cf-primary,
+      accent: $cf-accent,
+    ),
+    typography: $cf-typography,
+  )
+);
+
+@include mat.typography-hierarchy($cf-typography);
+@include mat.all-component-themes($codefellas-theme);

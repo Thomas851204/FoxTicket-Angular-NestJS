@@ -1,0 +1,17 @@
+@import "src/assets/styles/variables.scss";
+
+img {
+  margin: 3vmin;
+  width: 375px;
+  height: 222px;
+}
+
+.content-wrapper {
+  margin: 3vmin;
+  text-align: center;
+  flex-direction: column;
+}
+
+button.mdc-button {
+  background-color: $strong-green;
+}

@@ -1,0 +1,9 @@
+1. create your own .env file under backend/ folder
+2. add the lines below and modify to match to your environment
+
+DB_TYPE=mysql
+DB_USER=root
+DB_PASS=admin
+DB_HOST=localhost
+DB_NAME=codefellas
+DB_PORT=3306

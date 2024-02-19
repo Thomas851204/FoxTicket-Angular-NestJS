@@ -1,0 +1,78 @@
+:host {
+  background-color: red;
+}
+
+.item {
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+}
+
+img {
+  height: 210px;
+  width: auto;
+}
+
+.card {
+  border: none;
+}
+h2 {
+  margin: 0;
+  padding: 10px 20px;
+  color: white;
+  width: 100%;
+  background-color: #232323;
+  text-align: left;
+  background-color: #35635b;
+}
+
+.vote-average {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: gold;
+  font-size: 18px;
+  background-color: black;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.shadow {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.825));
+  text-align: center;
+}
+
+::ng-deep .p-carousel-content {
+  button {
+    &.p-carousel-prev {
+      background-color: red;
+      height: 30px;
+      background-color: white;
+      position: absolute;
+      left: 20px;
+      z-index: 1;
+      width: 30px;
+      border-radius: 50%;
+      color: black;
+      border: 2px solid black;
+    }
+
+    &.p-carousel-next {
+      background-color: red;
+      height: 30px;
+      background-color: white;
+      position: absolute;
+      right: 20px;
+      z-index: 1;
+      width: 30px;
+      border-radius: 50%;
+      color: black;
+      border: 2px solid black;
+    }
+  }
+}

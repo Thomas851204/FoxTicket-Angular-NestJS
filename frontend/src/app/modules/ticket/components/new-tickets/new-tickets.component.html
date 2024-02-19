@@ -1,0 +1,149 @@
+<!-- Left side of the New Tickets tab where we see a list of movies from the API call in table format -->
+<div id="tab">
+  <div class="table">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>Select</th>
+        <td mat-cell *matCellDef="let element">
+          <!-- in mat-checkbox [checked] gets the select value from the dataSource, (change) triggers the onCheckBoxChange method in any event (check, uncheck) -->
+          <mat-checkbox
+            [checked]="element.select"
+            (change)="onCheckboxChange($event, element)"
+          ></mat-checkbox>
+        </td>
+      </ng-container>
+      <!-- Movie ID Column -->
+      <ng-container matColumnDef="movieID">
+        <th mat-header-cell *matHeaderCellDef>Movie ID</th>
+        <!-- [ngStlye] sets the color of this cell to red if this movie's isInDB field is true in ELEMENT_DATA/dataSource -->
+        <td
+          [ngStyle]="{ color: element.isInDB ? 'red' : 'black' }"
+          mat-cell
+          *matCellDef="let element"
+        >
+          {{ element.movieID }}
+        </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td
+          mat-cell
+          [ngStyle]="{
+            color: element.isInDB ? 'red' : 'black'
+          }"
+          *matCellDef="let element"
+        >
+          {{ element.title }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <!-- with paginator the user can select how many rows are to be displayed per page and switch between pages -->
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+  <!-- Right side of the New Tickets tab where we can assign price/ticket amount/screen time to the selected movies -->
+  <div class="selection">
+    <div class="form-grid">
+      <!-- build form with an ngFor loop, by looping through the elements in movieFormList -->
+      <div *ngFor="let formGroup of movieFormList">
+        <form [formGroup]="formGroup">
+          <div class="form-row first">
+            <mat-form-field class="id" appearance="outline">
+              <mat-label>Movie ID</mat-label>
+              <input matInput formControlName="movieId" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Movie Title</mat-label>
+              <input matInput formControlName="title" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Ticket Price</mat-label>
+              <input matInput formControlName="price" type="number" min="0" />
+              <mat-error *ngIf="formGroup.get('price')?.invalid"
+                >Price is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Number of tickets</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="numOfTickets"
+                min="0"
+              />
+              <mat-error *ngIf="formGroup.get('numOfTickets')?.invalid"
+                >Number of tickets is required</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Screenings</mat-label>
+              <!-- By clicking on a date in the calendar, we trigger the addSelectedDate() method -->
+              <input
+                (dateInput)="addSelectedDate($event, formGroup)"
+                matInput
+                [matDatepicker]="picker"
+                placeholder="Choose a date"
+                (focus)="picker.open()"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="formGroup.get('screeningTimes')?.invalid"
+                >Pick at least one date</mat-error
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="form-row second">
+            <div class="input-container"></div>
+            <!-- Below in the seldates div, we will display every date we have chosen and add an "X" button next to every date. The div is displayed only if there is at least one date selected -->
+            <div
+              class="seldates"
+              *ngIf="formGroup.value.screeningTimes.length > 0"
+            >
+              <!-- the dates are built by iterating thrugh the screeningTimes array in the actual formgroup -->
+              <div
+                class="date"
+                *ngFor="
+                  let date of formGroup.value.screeningTimes;
+                  let i = index
+                "
+                class="selected-date"
+              >
+                {{ date | date : "longDate" }}
+                <!-- Clicking the button triggers the removeSelectedDate() method -->
+                <button
+                  class="datebutton"
+                  (click)="removeSelectedDate(i, formGroup)"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="button-container">
+      <!-- Submit button is displayed only if the checkedBoxes variable isnt empty, and enabled if all fields are valid. On click it calls the submitForms() method. -->
+      <button
+        *ngIf="checkedBoxes.length > 0"
+        mat-raised-button
+        [disabled]="!areAllFormsValid()"
+        (click)="submitForms()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
